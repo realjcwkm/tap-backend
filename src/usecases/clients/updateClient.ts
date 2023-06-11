@@ -1,5 +1,5 @@
-import { AppDataSource } from '../AppDataSource';
-import { Client } from '../entities/Client';
+import { AppDataSource } from '../../AppDataSource';
+import { Client } from '../../entities/Client';
 
 interface IDataClient {
 	idClient?: number;
