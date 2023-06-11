@@ -3,6 +3,7 @@ import { findAllEmployees } from '../usecases/employees/findAllEmployees';
 import { insertEmployee } from '../usecases/employees/insertEmployee';
 import { updateEmployee as employeeUpdate } from '../usecases/employees/updateEmployee';
 import { findEmployeeById } from '../usecases/employees/findEmployeeById';
+import { removeEmployee } from '../usecases/employees/removeEmployees';
 
 async function getEmployees(req: Request, res: Response) {
 	const employees = await findAllEmployees();
@@ -59,4 +60,17 @@ async function getEmployee(req: Request, res: Response) {
 	});
 }
 
-export { getEmployees, createEmployee, updateEmployee, getEmployee };
+async function deleteEmployee(req: Request, res: Response) {
+	const idEmployee = Number(req.params.id);
+
+	const employee = await removeEmployee(idEmployee);
+
+	if (employee) return res.send(employee);
+
+	return res.status(404).send({
+		Error: 'Unable to find employee by id',
+		status: 404,
+	});
+}
+
+export { getEmployees, createEmployee, updateEmployee, getEmployee, deleteEmployee };
