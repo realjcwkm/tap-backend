@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { findAllClients } from '../usecases/clients/findAllClients';
 import { insertClient } from '../usecases/clients/insertClient';
 import { updateClient as clientUpdate } from '../usecases/clients/updateClient';
+import { findClientById } from '../usecases/clients/findClientById';
 
 async function getClients(req: Request, res: Response) {
 	const clients = await findAllClients();
@@ -45,4 +46,17 @@ async function updateClient(req: Request, res: Response){
 	return res.status(404).send('Erro ao atualizar');
 }
 
-export { getClients, createClient, updateClient };
+async function getClient(req: Request, res: Response) {
+	const idClient = Number(req.params.id);
+
+	const client = await findClientById(idClient);
+
+	if (client) return res.send(client);
+
+	return res.status(404).send({
+		Error: 'Unable to find client by id',
+		status: 404,
+	});
+}
+
+export { getClients, createClient, updateClient, getClient };
