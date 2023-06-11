@@ -12,9 +12,11 @@ async function insertEmployee(dataEmployee: IDataEmployee) {
 
 		const employee: IDataEmployee = dataEmployee;
 
-		return employeeRepository.save(employee);
+		const result = await employeeRepository.save(employee);
+
+		return result;
 	} catch (error) {
-		console.error('Erro ao persistir o Employee ' + error);
+		console.error('Erro ao persistir o Employee\n' + error);
 		return undefined;
 	}
 }
