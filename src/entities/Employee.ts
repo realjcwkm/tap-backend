@@ -1,5 +1,5 @@
 import { Order } from './Order';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Employee {
@@ -9,9 +9,9 @@ export class Employee {
 	@Column()
 		nameEmployee: string;
 
-	@Column({ type: 'decimal', precision: 5, scale: 2 })
+	@Column({ type: 'decimal', precision: 7, scale: 2 })
 		salaryEmployee: number;
 
-	@OneToOne(() => Order, (order) => order.employee)
-		order: Order;
+	@OneToMany(() => Order, (order) => order.employee)
+		order: Order[];
 }

@@ -1,5 +1,6 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Order } from './Order';
+
 @Entity()
 export class Client {
 	@PrimaryGeneratedColumn()
@@ -11,6 +12,6 @@ export class Client {
 	@Column()
 		cpfClient: string;
 
-	@OneToOne(() => Order, (order) => order.client)
-		order: Order;
+	@OneToMany(() => Order, (order) => order.client)
+		order: Order[];
 }
