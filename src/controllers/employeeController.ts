@@ -34,9 +34,8 @@ async function createEmployee(req: Request, res: Response) {
 }
 
 async function updateEmployee(req: Request, res: Response){
-	console.log(req.params.id);
-
 	const dataEmployee: IDataEmployee = req.body;
+	
 	dataEmployee.idEmployee = Number(req.params.id);
 
 	const result = await employeeUpdate(dataEmployee);

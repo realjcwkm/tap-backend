@@ -12,7 +12,9 @@ async function insertClient(dataClient: IDataClient) {
 
 		const client: IDataClient = dataClient;
 
-		return clientRepository.save(client);
+		const result = await clientRepository.save(client);
+		
+		return result;
 	} catch (error) {
 		console.error('Erro ao persistir o cliente ' + error);
 		return undefined;

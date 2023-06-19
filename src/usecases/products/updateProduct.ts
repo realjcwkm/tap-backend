@@ -24,6 +24,7 @@ async function updateProduct(product: IDataProduct) {
 		productExist.nameProduct = product.nameProduct;
 		if(product.descProduct)
 			productExist.descProduct = product.descProduct;
+			
 		productExist.valueUnitProduct = product.valueUnitProduct;
 		productExist.countProduct = product.countProduct;
 
