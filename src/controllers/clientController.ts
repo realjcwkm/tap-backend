@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { findAllClients } from '../usecases/clients/findAllClients';
 import { insertClient } from '../usecases/clients/insertClient';
 import { updateClient as clientUpdate } from '../usecases/clients/updateClient';
@@ -22,7 +22,7 @@ interface IDataClient {
 	cpfClient: string,
 }
 
-async function createClient(req: Request, res: Response) {
+async function createClient(req: Request, res: Response, next: NextFunction) {
 	const dataClient: IDataClient = req.body;
 
 	const result = await insertClient(dataClient);
@@ -30,7 +30,7 @@ async function createClient(req: Request, res: Response) {
 	if(result)
 		return res.status(201).send(result);
 	
-	return res.status(404).send({});
+	next({message: 'Dados errados para o cliente'});
 }
 
 async function updateClient(req: Request, res: Response){
